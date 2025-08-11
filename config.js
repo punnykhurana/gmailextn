@@ -1,22 +1,22 @@
 // Firki Extension Configuration
 const FIRKI_CONFIG = {
-    // API Keys
-    GEMINI_API_KEY: 'your_gemini_api_key_here',
-    OPENAI_API_KEY: 'your_openai_api_key_here',
+    // API Keys - REPLACE WITH YOUR ACTUAL KEYS
+    GEMINI_API_KEY: 'your_gemini_api_key_here', // Get from: https://makersuite.google.com/app/apikey
+    OPENAI_API_KEY: 'your_openai_api_key_here', // Get from: https://platform.openai.com/api-keys
     
     // AI Models
     GEMINI_MODEL: 'gemini-2.2.5-flash-preview-05-20',
     OPENAI_MODEL: 'gpt-3.5-turbo',
     
-    // Backend Configuration
+    // Backend Configuration - REPLACE WITH YOUR RAILWAY URL
     BACKEND_ENABLED: true,
-    BACKEND_BASE_URL: 'https://your-backend-url.railway.app', // Replace with your deployed backend URL
+    BACKEND_BASE_URL: 'https://your-railway-url.up.railway.app', // Replace with your actual Railway URL
     BACKEND_TIMEOUT: 10000,
     BACKEND_FALLBACK: true,
     
     // Analytics Configuration
     ANALYTICS_ENABLED: true,
-    ANALYTICS_ENDPOINT: 'https://your-backend-url.railway.app/analytics', // Replace with your deployed backend URL
+    ANALYTICS_ENDPOINT: 'https://your-railway-url.up.railway.app/analytics', // Replace with your actual Railway URL
     
     // Feature Flags
     FEATURES: {
