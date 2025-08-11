@@ -8,15 +8,15 @@ const FIRKI_CONFIG = {
     GEMINI_MODEL: 'gemini-2.2.5-flash-preview-05-20',
     OPENAI_MODEL: 'gpt-3.5-turbo',
     
-    // Backend Configuration - REPLACE WITH YOUR RAILWAY URL
+    // Backend Configuration - UPDATED WITH ACTUAL RAILWAY URL
     BACKEND_ENABLED: true,
-    BACKEND_BASE_URL: 'https://your-railway-url.up.railway.app', // Replace with your actual Railway URL
+    BACKEND_BASE_URL: 'https://gmailextn-production.up.railway.app',
     BACKEND_TIMEOUT: 10000,
     BACKEND_FALLBACK: true,
     
     // Analytics Configuration
     ANALYTICS_ENABLED: true,
-    ANALYTICS_ENDPOINT: 'https://your-railway-url.up.railway.app/analytics', // Replace with your actual Railway URL
+    ANALYTICS_ENDPOINT: 'https://gmailextn-production.up.railway.app/analytics',
     
     // Feature Flags
     FEATURES: {
