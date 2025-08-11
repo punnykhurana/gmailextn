@@ -1,0 +1,1 @@
+AI-powered job description analyzer that extracts skills and generates boolean search queries for recruiters. Works directly in Gmail.

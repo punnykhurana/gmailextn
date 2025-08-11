@@ -1,0 +1,39 @@
+Firki - AI-Powered Job Description Analyzer
+
+Transform job descriptions into powerful boolean search queries instantly with AI.
+
+🔍 WHAT FIRKI DOES:
+• Extracts key technical skills from job descriptions using AI
+• Generates optimized boolean search queries for LinkedIn/ATS
+• Provides skill context and helpful questions for interviews
+• Works directly in Gmail - no copy/paste needed
+
+🚀 KEY FEATURES:
+• One-click analysis from Gmail emails
+• AI-powered skill extraction (Gemini & OpenAI)
+• Concise boolean searches (4-5 skills max)
+• Smart skill grouping and context
+• Analytics dashboard for tracking usage
+• Super lean UI - no clutter
+
+💼 PERFECT FOR:
+• Technical Recruiters
+• HR Professionals
+• Talent Acquisition Specialists
+• Hiring Managers
+• Anyone who needs to find candidates quickly
+
+⚡ HOW IT WORKS:
+1. Open a job description email in Gmail
+2. Click the Firki button (✉️)
+3. Get instant skills extraction and boolean search
+4. Copy the search to LinkedIn or your ATS
+
+🎯 BENEFITS:
+• Save 10-15 minutes per job description
+• More accurate candidate searches
+• Better skill matching
+• Consistent search quality
+• Track your sourcing performance
+
+Built by recruiters, for recruiters. Make your boolean searches smarter with AI.
