@@ -1,0 +1,33 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="60" fill="#2d5a5a" stroke="#1a3a3a" stroke-width="2"/>
+  
+  <!-- Abstract Firki symbol - inspired by connected nodes/network -->
+  <!-- Main larger circle (bottom) -->
+  <circle cx="64" cy="80" r="16" fill="#4a7c59" stroke="#2d5a5a" stroke-width="2"/>
+  
+  <!-- Smaller circle (top) -->
+  <circle cx="64" cy="48" r="10" fill="#4a7c59" stroke="#2d5a5a" stroke-width="2"/>
+  
+  <!-- Connecting line between circles -->
+  <line x1="64" y1="58" x2="64" y2="70" stroke="#4a7c59" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Small dot above top circle -->
+  <circle cx="64" cy="32" r="3" fill="#4a7c59"/>
+  
+  <!-- Connecting line to dot -->
+  <line x1="64" y1="38" x2="64" y2="42" stroke="#4a7c59" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Additional connecting elements for network effect -->
+  <!-- Horizontal connection lines -->
+  <line x1="48" y1="64" x2="56" y2="64" stroke="#4a7c59" stroke-width="2" stroke-linecap="round"/>
+  <line x1="72" y1="64" x2="80" y2="64" stroke="#4a7c59" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Diagonal connections for network feel -->
+  <line x1="48" y1="48" x2="56" y2="56" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  <line x1="72" y1="48" x2="80" y2="56" stroke="#4a7c59" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  
+  <!-- Small accent circles -->
+  <circle cx="44" cy="64" r="2" fill="#4a7c59" opacity="0.8"/>
+  <circle cx="84" cy="64" r="2" fill="#4a7c59" opacity="0.8"/>
+</svg> 
