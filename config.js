@@ -1,8 +1,8 @@
 // Firki Extension Configuration
 const FIRKI_CONFIG = {
-    // API Keys - REPLACE WITH YOUR ACTUAL KEYS
-    GEMINI_API_KEY: 'your_gemini_api_key_here', // Get from: https://makersuite.google.com/app/apikey
-    OPENAI_API_KEY: 'your_openai_api_key_here', // Get from: https://platform.openai.com/api-keys
+    // API Keys - Set these via environment variables or manually
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY || 'your_gemini_api_key_here',
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY || 'your_openai_api_key_here',
     
     // AI Models
     GEMINI_MODEL: 'gemini-2.2.5-flash-preview-05-20',
