@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Firki - AI Job Description Analyzer",
   "version": "2.0.0",
-  "description": "AI-powered job description analyzer that extracts skills and generates boolean search queries for recruiters.",
+  "description": "Save 15 minutes per job description. AI extracts skills and generates boolean searches instantly from Gmail.",
   
   "permissions": [
     "activeTab",

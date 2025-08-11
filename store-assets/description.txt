@@ -1,39 +1,32 @@
-Firki - AI-Powered Job Description Analyzer
+Stop spending 15+ minutes manually extracting skills from job descriptions. Firki does it in seconds.
 
-Transform job descriptions into powerful boolean search queries instantly with AI.
+WHAT FIRKI DOES:
+• Reads job descriptions directly from your Gmail emails
+• Instantly extracts the key technical skills using AI
+• Generates optimized boolean search queries for LinkedIn
+• Gives you ready-to-use search strings that actually find good candidates
 
-🔍 WHAT FIRKI DOES:
-• Extracts key technical skills from job descriptions using AI
-• Generates optimized boolean search queries for LinkedIn/ATS
-• Provides skill context and helpful questions for interviews
-• Works directly in Gmail - no copy/paste needed
-
-🚀 KEY FEATURES:
-• One-click analysis from Gmail emails
-• AI-powered skill extraction (Gemini & OpenAI)
-• Concise boolean searches (4-5 skills max)
-• Smart skill grouping and context
-• Analytics dashboard for tracking usage
-• Super lean UI - no clutter
-
-💼 PERFECT FOR:
-• Technical Recruiters
-• HR Professionals
-• Talent Acquisition Specialists
-• Hiring Managers
-• Anyone who needs to find candidates quickly
-
-⚡ HOW IT WORKS:
-1. Open a job description email in Gmail
-2. Click the Firki button (✉️)
-3. Get instant skills extraction and boolean search
-4. Copy the search to LinkedIn or your ATS
-
-🎯 BENEFITS:
+WHY RECRUITERS NEED THIS:
 • Save 10-15 minutes per job description
-• More accurate candidate searches
-• Better skill matching
-• Consistent search quality
-• Track your sourcing performance
+• Get more accurate candidate searches
+• Stop missing qualified candidates due to poor search terms
+• Focus on what matters - talking to candidates, not parsing job descriptions
 
-Built by recruiters, for recruiters. Make your boolean searches smarter with AI.
+HOW IT WORKS:
+1. Open a job description email in Gmail
+2. Click the Firki button (✉️) 
+3. Get instant skills + boolean search query
+4. Copy the search to LinkedIn and find candidates
+
+PERFECT FOR:
+• Technical recruiters who need to find developers, engineers, analysts
+• HR teams sourcing for IT, software, data science roles
+• Anyone who spends time manually reading job descriptions
+
+EXAMPLE:
+Job Description: "Senior React Developer with 5+ years experience, TypeScript, Node.js, AWS"
+Firki Output: "React" AND "TypeScript" AND ("Node.js" OR "AWS") AND "5+ years"
+
+Stop doing manual work. Let AI do the heavy lifting while you focus on finding and hiring great candidates.
+
+Built by recruiters, for recruiters.

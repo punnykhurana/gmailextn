@@ -1,1 +1,1 @@
-AI-powered job description analyzer that extracts skills and generates boolean search queries for recruiters. Works directly in Gmail.
+Save 15 minutes per job description. AI extracts skills and generates boolean searches instantly from Gmail.
