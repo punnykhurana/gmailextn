@@ -58,3 +58,4 @@ logs/
 
 # API Keys (backup)
 config_backup.js
+*.zip

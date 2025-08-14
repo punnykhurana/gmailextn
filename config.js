@@ -1,8 +1,8 @@
 // Firki Extension Configuration
 const FIRKI_CONFIG = {
-    // API Keys - Set these via environment variables or manually
-    GEMINI_API_KEY: process.env.GEMINI_API_KEY || 'your_gemini_api_key_here',
-    OPENAI_API_KEY: process.env.OPENAI_API_KEY || 'your_openai_api_key_here',
+    // API Keys - Set these manually or use a different approach for browser
+    GEMINI_API_KEY: 'your_gemini_api_key_here',
+    OPENAI_API_KEY: 'your_openai_api_key_here',
     
     // AI Models
     GEMINI_MODEL: 'gemini-2.2.5-flash-preview-05-20',
@@ -14,8 +14,8 @@ const FIRKI_CONFIG = {
     BACKEND_TIMEOUT: 10000,
     BACKEND_FALLBACK: true,
     
-    // Analytics Configuration
-    ANALYTICS_ENABLED: true,
+    // Analytics Configuration - DISABLED TO PREVENT FETCH ERRORS
+    ANALYTICS_ENABLED: false, // Set to false to disable analytics completely
     ANALYTICS_ENDPOINT: 'https://gmailextn-production.up.railway.app/analytics',
     
     // Feature Flags
@@ -24,7 +24,7 @@ const FIRKI_CONFIG = {
         BOOLEAN_SEARCH: true,
         SKILL_EXTRACTION: true,
         CONTEXT_HELPER: true,
-        ANALYTICS: true
+        ANALYTICS: false // Also disable analytics feature
     },
     
     // UI Configuration

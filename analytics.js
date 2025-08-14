@@ -7,10 +7,12 @@
   // Analytics configuration
   const ANALYTICS_CONFIG = {
     ENABLED: true, // Default to enabled, will be updated when config loads
-    ENDPOINT: 'http://localhost:5001/analytics', // Default endpoint
+    ENDPOINT: 'https://gmailextn-production.up.railway.app/analytics', // Updated endpoint
     BATCH_SIZE: 10, // Send data in batches
     FLUSH_INTERVAL: 30000, // 30 seconds
     SESSION_TIMEOUT: 1800000, // 30 minutes
+    MAX_RETRIES: 3, // Maximum retry attempts
+    RETRY_DELAY: 5000, // 5 seconds between retries
   };
 
   // Update config when FIRKI_CONFIG becomes available
@@ -26,6 +28,8 @@
   let sessionId = null;
   let lastActivity = Date.now();
   let isFlushing = false;
+  let retryCount = 0;
+  let isBackendHealthy = true;
 
   // Initialize analytics
   function initAnalytics() {
@@ -124,9 +128,9 @@
     });
   }
 
-  // Flush analytics data to server
+  // Flush analytics data to server with retry logic
   async function flushAnalytics() {
-    if (isFlushing || analyticsQueue.length === 0) return;
+    if (isFlushing || analyticsQueue.length === 0 || !isBackendHealthy) return;
     
     isFlushing = true;
     const eventsToSend = [...analyticsQueue];
@@ -135,7 +139,7 @@
     console.log('📊 Flushing analytics data:', {
       endpoint: ANALYTICS_CONFIG.ENDPOINT,
       eventsCount: eventsToSend.length,
-      events: eventsToSend.map(e => ({ event: e.event, data: e.data }))
+      retryCount: retryCount
     });
 
     try {
@@ -148,29 +152,58 @@
           events: eventsToSend,
           sessionId: sessionId,
           timestamp: Date.now()
-        })
+        }),
+        // Add timeout to prevent hanging requests
+        signal: AbortSignal.timeout(10000) // 10 second timeout
       });
 
       if (response.ok) {
         console.log('📊 Analytics data sent successfully');
+        retryCount = 0; // Reset retry count on success
+        isBackendHealthy = true;
       } else {
-        console.warn('⚠️ Failed to send analytics data:', response.status, response.statusText);
-        // Re-queue failed events
-        analyticsQueue.unshift(...eventsToSend);
+        console.warn('⚠️ Analytics server error:', response.status, response.statusText);
+        handleAnalyticsError(eventsToSend, new Error(`HTTP ${response.status}`));
       }
     } catch (error) {
-      console.warn('⚠️ Analytics flush failed:', error);
-      // Re-queue failed events
-      analyticsQueue.unshift(...eventsToSend);
+      console.warn('⚠️ Analytics flush failed:', error.message);
+      handleAnalyticsError(eventsToSend, error);
     } finally {
       isFlushing = false;
+    }
+  }
+
+  // Handle analytics errors with retry logic
+  function handleAnalyticsError(eventsToSend, error) {
+    retryCount++;
+    
+    if (retryCount >= ANALYTICS_CONFIG.MAX_RETRIES) {
+      console.warn('⚠️ Analytics max retries reached, disabling analytics temporarily');
+      isBackendHealthy = false;
+      // Re-enable after 5 minutes
+      setTimeout(() => {
+        isBackendHealthy = true;
+        retryCount = 0;
+        console.log('📊 Analytics re-enabled after timeout');
+      }, 300000); // 5 minutes
+    } else {
+      // Re-queue events for retry
+      analyticsQueue.unshift(...eventsToSend);
+      console.log(`📊 Re-queued ${eventsToSend.length} events for retry ${retryCount}/${ANALYTICS_CONFIG.MAX_RETRIES}`);
+      
+      // Retry after delay
+      setTimeout(() => {
+        flushAnalytics();
+      }, ANALYTICS_CONFIG.RETRY_DELAY);
     }
   }
 
   // Start periodic flush
   function startPeriodicFlush() {
     setInterval(() => {
-      flushAnalytics();
+      if (isBackendHealthy) {
+        flushAnalytics();
+      }
     }, ANALYTICS_CONFIG.FLUSH_INTERVAL);
   }
 
@@ -190,7 +223,9 @@
       sessionId: sessionId,
       eventsInQueue: analyticsQueue.length,
       lastActivity: lastActivity,
-      isSessionActive: isSessionActive()
+      isSessionActive: isSessionActive(),
+      isBackendHealthy: isBackendHealthy,
+      retryCount: retryCount
     };
   }
 
@@ -204,22 +239,15 @@
     trackSearchGeneration: trackSearchGeneration,
     trackUserInteraction: trackUserInteraction,
     updateActivity: updateActivity,
-    getSummary: getAnalyticsSummary,
-    flush: flushAnalytics,
-    updateConfig: updateAnalyticsConfig
+    isSessionActive: isSessionActive,
+    getSummary: getAnalyticsSummary
   };
 
-  // Initialize when DOM is ready
+  // Auto-initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initAnalytics);
   } else {
     initAnalytics();
   }
 
-  // Track activity on user interactions
-  document.addEventListener('click', updateActivity);
-  document.addEventListener('keypress', updateActivity);
-  document.addEventListener('scroll', updateActivity);
-
-  console.log('📊 Analytics module loaded');
 })();
