@@ -707,8 +707,9 @@
 
   // AI-powered Boolean search generation (if available)
   async function generateAIBooleanSearch(parsedJD, mode = 'simple') {
-    if (!FIRKI_CONFIG.OPENAI_API_KEY || !FIRKI_CONFIG.ENABLE_AI_BOOLEAN_GENERATION) {
-      console.log('⏸️ AI boolean generation disabled, using fallback');
+    // Use backend proxy so API keys remain server-side
+    if (!FIRKI_CONFIG.BACKEND_ENABLED || !FIRKI_CONFIG.BACKEND_BASE_URL) {
+      console.log('⏸️ Backend not configured, using fallback');
       return generateFallbackBooleanSearch(parsedJD, mode);
     }
 
@@ -719,69 +720,44 @@
     }
 
     const { rawText } = parsedJD;
-    
     if (!rawText || rawText.length < 50) {
       console.log('⚠️ No job description available for AI boolean generation');
       return generateFallbackBooleanSearch(parsedJD, mode);
     }
 
-    const prompt = `
-Given the job description below, extract high-signal standalone keywords that a qualified candidate would realistically write in their resume (not long phrases or bundled terms). Focus on technical skills and avoid location-based searches.
-
-Job Description:
-${rawText}
-
-Requirements:
-- For 'simple' mode: Extract 2-3 most critical technical skills and use AND logic (all must match)
-- For 'detailed' mode: Extract 3-4 broader technical skills and use OR logic (any can match)
-- Focus on specific technologies, platforms, and technical processes
-- AVOID location-based searches (cities, states, countries)
-- AVOID implied skills like "Frontend", "Backend", "Full Stack", "UI/UX", "UI", "UX" - these are role descriptions, not technical skills
-- Pay special attention to job titles that indicate specific technical processes (e.g., "Data Conversion", "Data Migration", "Integration", "Automation")
-- Use proper LinkedIn Boolean syntax with quotes
-- Return ONLY the Boolean search string, no explanations
-
-Examples:
-- "Workday Data Conversion Developer" → "Workday" AND ("Data Conversion" OR "Data Migration")
-- "React Frontend Developer" → "React" AND "JavaScript"
-- "AWS DevOps Engineer" → "AWS" AND "DevOps"
-
-Mode: ${mode}
-
-Boolean Search:`;
+    // Basic job title extraction (reuse fallback logic pattern)
+    const jobTitleMatch = rawText.match(/(?:Job Title|Position|Role):\s*([^\n\r]+)/i) ||
+                          rawText.match(/([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s+(?:Developer|Engineer|Analyst|Specialist|Consultant|Administrator|Architect))/);
+    const jobTitle = jobTitleMatch ? jobTitleMatch[1].trim() : '';
 
     try {
-      const response = await fetch(FIRKI_CONFIG.OPENAI_API_URL, {
+      const resp = await fetch(`${FIRKI_CONFIG.BACKEND_BASE_URL}/api/analyze-jd`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${FIRKI_CONFIG.OPENAI_API_KEY}`
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: FIRKI_CONFIG.OPENAI_MODEL,
-          messages: [{ role: 'user', content: prompt }],
-          max_tokens: FIRKI_CONFIG.OPENAI_MAX_TOKENS,
-          temperature: FIRKI_CONFIG.OPENAI_TEMPERATURE
+          job_title: jobTitle,
+          job_description: rawText,
+          mode
         })
       });
 
-      if (!response.ok) {
-        throw new Error(`AI API error: ${response.status}`);
+      if (!resp.ok) {
+        throw new Error(`Backend error: ${resp.status}`);
       }
 
-      const data = await response.json();
-      const aiQuery = data.choices[0].message.content.trim();
-      
+      const data = await resp.json();
+      const aiQuery = data?.data?.boolean_search || '';
+
       if (aiQuery && aiQuery.length > BOOLEAN_CONFIG.MIN_SEARCH_LENGTH) {
         const validatedQuery = validateBooleanQuery(aiQuery);
-        console.log('🤖 AI generated boolean search:', validatedQuery);
+        console.log('🤖 Backend AI generated boolean search:', validatedQuery);
         return validatedQuery;
-      } else {
-        console.log('⚠️ AI returned invalid query, using fallback');
-        return generateFallbackBooleanSearch(parsedJD, mode);
       }
+
+      console.log('⚠️ Backend returned invalid query, using fallback');
+      return generateFallbackBooleanSearch(parsedJD, mode);
     } catch (error) {
-      console.error('❌ AI boolean generation failed:', error);
+      console.error('❌ Backend AI boolean generation failed:', error);
       return generateFallbackBooleanSearch(parsedJD, mode);
     }
   }
