@@ -1,0 +1,71 @@
+{
+  "manifest_version": 3,
+  "name": "Firki - AI Job Description Analyzer",
+  "version": "2.0.1",
+  "description": "Save 15 minutes per job description. AI extracts skills and generates boolean searches instantly from Gmail.",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "https://gmailextn-production.up.railway.app/*"
+  ],
+  
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": [
+        "config.js",
+        "auth.js",
+        "boolean-search.js",
+        "skill-context-helper.js",
+        "intelligent-jd-parser.js",
+        "gemini-context-analyzer.js",
+        "backend-connector.js",
+        "analytics.js",
+        "ui.js",
+        "content.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Firki - AI Job Analyzer",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["https://mail.google.com/*"]
+    }
+  ],
+  
+  "author": "Firki Team",
+  "homepage_url": "https://github.com/punnykhurana/gmailextn",
+  
+  "minimum_chrome_version": "88"
+} 

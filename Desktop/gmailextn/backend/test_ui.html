@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean Search Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            height: 200px;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            width: 100%;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        .boolean-search {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #c3e6c3;
+            font-family: monospace;
+            font-size: 16px;
+            color: #2d5a2d;
+            word-break: break-all;
+        }
+        .error {
+            background: #ffeaea;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #feb2b2;
+        }
+        .loading {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        .skills-list {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 5px;
+            border: 1px solid #b3d9ff;
+        }
+        .skill-item {
+            display: inline-block;
+            background: white;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+        
+        .extraction-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        .ai-context {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 5px;
+            border: 1px solid #bbdefb;
+        }
+        
+        .context-text {
+            font-style: italic;
+            color: #1976d2;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Boolean Search Generator</h1>
+    
+    <div class="container">
+        <h2>Generate Boolean Search from Job Description</h2>
+        <div class="form-group">
+            <label for="jobDescription">Job Description:</label>
+            <textarea id="jobDescription" placeholder="Paste the job description here to extract skills and generate a boolean search query...">We are looking for a Workday Data Conversion Specialist to join our team. The ideal candidate will have experience with Workday HCM, data migration, ETL processes, and SQL. Knowledge of HRIS systems and business process configuration is required. Experience with data validation, testing, and documentation is preferred.</textarea>
+        </div>
+        
+        <button onclick="generateBooleanSearch()" id="generateBtn">Generate Boolean Search</button>
+        
+        <div id="results" style="display: none;"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5001';
+        
+        async function generateBooleanSearch() {
+            const jobDescription = document.getElementById('jobDescription').value;
+            
+            if (!jobDescription.trim()) {
+                alert('Please enter a job description');
+                return;
+            }
+            
+            const btn = document.getElementById('generateBtn');
+            const results = document.getElementById('results');
+            
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+            results.style.display = 'none';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/analyze-jd`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        job_title: '',
+                        job_description: jobDescription
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    displayResults(data);
+                } else {
+                    throw new Error(data.error || 'Analysis failed');
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                results.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Generate Boolean Search';
+            }
+        }
+        
+        function displayResults(data) {
+            const results = document.getElementById('results');
+            
+            // Limit skills to top 4-5 for shorter boolean search
+            const topSkills = data.skills.slice(0, 5);
+            
+            let html = `
+                <div class="results">
+                    <h3>Generated Boolean Search</h3>
+                    
+                    <div class="skills-list">
+                        <strong>Top Skills Extracted:</strong><br>
+            `;
+            
+            topSkills.forEach(skill => {
+                html += `<span class="skill-item">${skill.name}</span>`;
+            });
+            
+            html += `
+                    </div>
+                    
+                    <h4>Boolean Search Query:</h4>
+                    <div class="boolean-search">${data.boolean_search}</div>
+                    
+                    <div class="extraction-info">
+                        <strong>Extraction Method:</strong> ${data.extraction_method || 'Unknown'}<br>
+                        <strong>AI Boolean Used:</strong> ${data.ai_boolean_used ? 'Yes' : 'No'}
+                    </div>
+            `;
+            
+            // Add AI context if available
+            if (data.ai_context) {
+                html += `
+                    <div class="ai-context">
+                        <h4>AI Analysis:</h4>
+                        <div class="context-text">${data.ai_context}</div>
+                    </div>
+                `;
+            }
+            
+            html += `</div>`;
+            
+            results.innerHTML = html;
+            results.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

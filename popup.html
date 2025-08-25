@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firki - AI Recruitment Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Google Sans', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 32px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: 24px;
+        }
+
+        .logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4f46e5;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 32px;
+        }
+
+        .status-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .status-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .auth-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .auth-status.authenticated {
+            color: #065f46;
+        }
+
+        .auth-status.not-authenticated {
+            color: #991b1b;
+        }
+
+        .auth-status svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .user-email {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #3730a3, #312e81);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+        }
+
+        .btn-secondary:hover {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .status {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo and Title -->
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z" fill="#4f46e5"/>
+                <path d="M12 18L10 22L12 20L14 22L12 18Z" fill="#4f46e5" opacity="0.7"/>
+            </svg>
+        </div>
+        
+        <h1 class="title">Firki</h1>
+        <p class="subtitle">AI-Powered Recruitment Assistant</p>
+
+        <!-- Authentication Status -->
+        <div class="status-card">
+            <h3>Authentication Status</h3>
+            
+            <div class="auth-status" id="authStatus">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z" fill="currentColor"/>
+                </svg>
+                <span id="authStatusText">Checking...</span>
+            </div>
+            
+            <div class="user-email" id="userEmail"></div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-secondary" id="refreshAuthBtn" style="flex: 1;">
+                    Refresh Status
+                </button>
+                <button class="btn btn-secondary" id="logoutBtn" style="flex: 1; display: none;">
+                    Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Backend Status -->
+        <div class="status-card">
+            <h3>AI Backend Status</h3>
+            
+            <div class="auth-status" id="backendStatus">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5L12 2Z" fill="currentColor"/>
+                </svg>
+                <span id="backendStatusText">Checking...</span>
+            </div>
+            
+            <div class="user-email" id="backendUrl"></div>
+            
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-secondary" id="refreshBackendBtn" style="flex: 1;">
+                    Test Connection
+                </button>
+                <button class="btn btn-secondary" id="toggleBackendBtn" style="flex: 1;">
+                    Disable Backend
+                </button>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div class="status" id="statusMessage"></div>
+
+        <!-- Instructions -->
+        <div class="status-card">
+            <h3>How to Use</h3>
+            <p style="font-size: 14px; color: #64748b; line-height: 1.5; text-align: left;">
+                1. <strong>Sign in</strong> with your Gmail account<br>
+                2. <strong>Open a job email</strong> in Gmail<br>
+                3. <strong>Click the Firki button</strong> in the sidebar<br>
+                4. <strong>Generate boolean search</strong> for LinkedIn<br>
+                5. <strong>Click LinkedIn button</strong> to search
+            </p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html> 

@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Dark Blue (#1E40AF) custom classes - matching the darker blue from the image */
+.bg-dark-blue {
+  background-color: #1E40AF;
+}
+
+.bg-dark-blue-hover {
+  background-color: #1D4ED8;
+}
+
+.bg-dark-blue-light {
+  background-color: #DBEAFE;
+}
+
+.bg-dark-blue-lighter {
+  background-color: #EFF6FF;
+}
+
+.text-dark-blue {
+  color: #1E40AF;
+}
+
+.text-dark-blue-dark {
+  color: #1E3A8A;
+}
+
+.text-dark-blue-darker {
+  color: #1E293B;
+}
+
+.border-dark-blue {
+  border-color: #1E40AF;
+}
+
+.border-dark-blue-light {
+  border-color: #DBEAFE;
+}

@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firki - AI-Powered Job Description Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Removed external Lucide CDN - using inline SVG icons instead -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #1E40AF 0%, #2563EB 50%, #3B82F6 100%); }
+        .gradient-text { background: linear-gradient(135deg, #1E40AF, #3B82F6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
+        .hover-lift { transition: transform 0.2s ease-in-out; }
+        .hover-lift:hover { transform: translateY(-4px); }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold rounded-lg flex items-center justify-center text-sm">
+                        F
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">Firki</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-blue-600 transition-colors">How it Works</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-blue-600 transition-colors">Pricing</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="https://chrome.google.com/webstore/detail/firki" class="px-4 py-2 text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                        Get Extension
+                    </a>
+                    <a href="https://firki-web.vercel.app" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        Try Web App
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+                    AI-Powered Job Description
+                    <span class="block gradient-text">Analysis Made Simple</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                    Transform job descriptions into actionable insights. Generate boolean searches, 
+                    interview questions, and candidate profiles with AI precision.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://chrome.google.com/webstore/detail/firki" class="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>Install Chrome Extension</span>
+                    </a>
+                    <a href="https://firki-web.vercel.app" class="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        <span>Try Web App</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Features</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Everything you need to streamline your recruitment process
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-sm hover-lift">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Boolean Search Generation</h3>
+                    <p class="text-gray-600">
+                        Automatically generate optimized boolean search strings for LinkedIn, 
+                        Indeed, and other job boards to find the perfect candidates.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm hover-lift">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Interview Questions</h3>
+                    <p class="text-gray-600">
+                        Get role-specific interview questions based on the job requirements 
+                        to assess candidate skills effectively.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm hover-lift">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Candidate Profiling</h3>
+                    <p class="text-gray-600">
+                        Extract core, inferred, and contextual skills to build comprehensive 
+                        candidate profiles for better hiring decisions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Three simple steps to transform your recruitment process
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        1
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Paste Job Description</h3>
+                    <p class="text-gray-600">
+                        Simply paste any job description into our AI-powered analyzer
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        2
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">AI Analysis</h3>
+                    <p class="text-gray-600">
+                        Our AI extracts skills, generates searches, and creates interview questions
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                        3
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Find Candidates</h3>
+                    <p class="text-gray-600">
+                        Use the generated boolean search to find perfect candidates on LinkedIn
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">See It In Action</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Experience the power of AI-driven recruitment analysis
+                </p>
+            </div>
+            
+            <!-- Demo Tabs -->
+            <div class="flex justify-center mb-8">
+                <div class="bg-white rounded-lg p-1 shadow-sm">
+                    <button id="gmail-tab" class="px-6 py-3 rounded-md font-medium transition-all duration-300 bg-blue-600 text-white">
+                        Gmail Extension
+                    </button>
+                    <button id="webapp-tab" class="px-6 py-3 rounded-md font-medium transition-all duration-300 text-gray-600 hover:text-gray-900">
+                        Web Application
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gmail Extension Demo -->
+            <div id="gmail-demo" class="demo-content">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-6xl mx-auto">
+                    <!-- Gmail Top Bar -->
+                    <div class="bg-white border-b border-gray-200 px-4 py-3 flex items-center space-x-4">
+                        <div class="flex items-center space-x-4">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-6 bg-red-500 rounded text-white text-xs font-bold flex items-center justify-center">M</div>
+                                <span class="text-xl font-semibold text-gray-900">Gmail</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 max-w-2xl">
+                            <div class="relative">
+                                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                <input type="text" placeholder="Search mail" class="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-lg border-none focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Gmail Interface -->
+                    <div class="flex h-96">
+                        <!-- Left Sidebar -->
+                        <div class="w-64 bg-gray-50 p-4">
+                            <button class="w-full bg-blue-100 text-blue-700 px-4 py-3 rounded-full font-medium mb-6 hover:bg-blue-200 transition-colors">
+                                Compose
+                            </button>
+                            <div class="space-y-1">
+                                <div class="flex items-center space-x-3 p-2 bg-blue-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span class="text-sm font-medium text-blue-600">Mail</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-2 bg-blue-50 rounded-lg">
+                                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                                    </svg>
+                                    <span class="text-sm font-medium text-blue-600">Inbox</span>
+                                    <span class="text-xs bg-blue-600 text-white px-2 py-1 rounded-full">2</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
+                                    </svg>
+                                    <span class="text-sm text-gray-700">Starred</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span class="text-sm text-gray-700">Snoozed</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                    </svg>
+                                    <span class="text-sm text-gray-700">Sent</span>
+                                </div>
+                                <div class="flex items-center space-x-3 p-2 hover:bg-gray-100 rounded-lg">
+                                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span class="text-sm text-gray-700">Drafts</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Content Area -->
+                        <div class="flex-1 flex">
+                            <!-- Email Content -->
+                            <div class="flex-1 p-6 border-r border-gray-200">
+                                <!-- Email Toolbar -->
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-14 0h14"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4a4 4 0 014-4h6a4 4 0 014 4v4"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 3v4m0-4a2 2 0 012-2h6a2 2 0 012 2m-2 0v4"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                        </svg>
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                        <span>5 of 33,148</span>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <!-- Email Content -->
+                                <div class="bg-white">
+                                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Client Need Summary - Web Developer (Part-Time Contract)</h2>
+                                    
+                                    <div class="space-y-3 text-sm text-gray-700">
+                                        <p><strong>Part time Hours:</strong> 20 – 30 a week</p>
+                                        <p class="bg-yellow-100 p-2 rounded"><strong>Interview times - 2 slots:</strong> Tuesday, 8/26 at 2pm and 2:30pm</p>
+                                        <p>The client is seeking a <strong>senior-level front-end web developer</strong> to support their main website, team member.</p>
+                                        
+                                        <div class="mt-4">
+                                            <p class="font-semibold">Future Tech Stack:</p>
+                                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                                <li>CMS: Contentful</li>
+                                                <li>eCommerce: Shopify Plus</li>
+                                                <li>Frontend: Hydrogen (Shopify's React-based framework)</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <p class="font-semibold">Role Details:</p>
+                                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                                <li>Focus: 75-80% front-end development - JavaScript/Typescript</li>
+                                                <li>Experience with React/NodeJS/TypeScript</li>
+                                                <li>Experience with Hydrogen or other CMS is ideal</li>
+                                                <li>Familiarity with Jira, Git, and independent project work is important</li>
+                                                <li>Backend DevOps knowledge (AWS, Docker, shell operations)</li>
+                                                <li>Experience with Atlassian tools</li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <p class="font-semibold">RESPONSIBILITIES:</p>
+                                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                                <li>Custom Shopify apps development</li>
+                                                <li>Marketing and fulfillment tools</li>
+                                                <li>Backend tools and hosting management</li>
+                                                <li>SQL/ORM database operations</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Floating Firki Button -->
+                                <div class="absolute top-4 right-4">
+                                    <button class="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-blue-700 transition-colors shadow-lg">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                        </svg>
+                                        <span class="font-medium">Firki</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Firki Extension Panel (Right Sidebar) -->
+                            <div class="w-80 bg-white border-l border-gray-200 p-4">
+                                <!-- Panel Header -->
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-600 rounded-full flex items-center justify-center">
+                                            <span class="text-white text-sm font-bold">F</span>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Firki</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-4 h-4 text-gray-500 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                                        </svg>
+                                        <svg class="w-4 h-4 text-gray-500 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <!-- Key Skills Section -->
+                                <div class="mb-6">
+                                    <div class="flex items-center space-x-2 mb-3">
+                                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <span class="font-semibold text-gray-900">Key Skills:</span>
+                                    </div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">react</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">typescript</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">shopify</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">nodejs</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">aws</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">docker</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">contentful</span>
+                                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm">hydrogen</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Boolean Search Section -->
+                                <div class="mb-4">
+                                    <label class="block text-sm font-semibold text-gray-900 mb-2">Boolean Search String</label>
+                                    <div class="relative">
+                                        <textarea class="w-full p-3 bg-gray-50 border border-gray-200 rounded text-sm font-mono resize-none" rows="3" readonly>"Java" AND "salesforce" AND "DevOps"</textarea>
+                                        <button class="absolute top-2 right-2 p-1 text-gray-500 hover:bg-gray-200 rounded transition-colors">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- LinkedIn Search Button -->
+                                <button class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center space-x-2">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                    <span>Search on LinkedIn</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Web App Demo -->
+            <div id="webapp-demo" class="demo-content hidden">
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden max-w-6xl mx-auto">
+                    <!-- Browser Header -->
+                    <div class="bg-gray-100 px-4 py-3 flex items-center space-x-2">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 bg-white rounded-lg px-4 py-2 mx-4 text-sm text-gray-600">
+                            firki-web.vercel.app
+                        </div>
+                    </div>
+                    
+                    <!-- Web App Interface -->
+                    <div class="flex h-96">
+                        <!-- Left Sidebar -->
+                        <div class="w-16 bg-gray-50 flex flex-col items-center py-4">
+                            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold mb-4 webapp-logo">
+                                F
+                            </div>
+                            <div class="w-8 h-8 bg-gray-200 rounded flex items-center justify-center mb-2">
+                                <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Content -->
+                        <div class="flex-1 flex">
+                            <!-- Job Description Input -->
+                            <div class="w-1/2 p-6 border-r border-gray-200">
+                                <div class="mb-4">
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Job Description</h3>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4 h-64 overflow-y-auto job-input-area">
+                                    <div class="text-sm text-gray-700 leading-relaxed">
+                                        <p class="mb-3"><strong>Senior Software Engineer</strong></p>
+                                        <p class="mb-2">We are seeking a talented Senior Software Engineer to join our growing team...</p>
+                                        <p class="mb-2"><strong>Requirements:</strong></p>
+                                        <ul class="list-disc list-inside space-y-1 ml-4">
+                                            <li>5+ years of experience in React, Node.js</li>
+                                            <li>Experience with AWS cloud services</li>
+                                            <li>Strong problem-solving skills</li>
+                                            <li>Experience with microservices architecture</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Analysis Results -->
+                            <div class="w-1/2 p-6">
+                                <div class="mb-4">
+                                    <div class="flex space-x-1">
+                                        <button class="px-3 py-1 bg-blue-600 text-white rounded text-sm font-medium webapp-search-tab">Search</button>
+                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm font-medium webapp-questions-tab">Questions</button>
+                                        <button class="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm font-medium webapp-email-tab">Email</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-4 webapp-results">
+                                    <div class="mb-4">
+                                        <h4 class="text-sm font-semibold text-gray-800 flex items-center mb-3">
+                                            <svg class="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                            </svg>
+                                            Boolean Search
+                                        </h4>
+                                        <div class="bg-white border border-gray-200 rounded p-3 text-xs font-mono text-gray-700 webapp-boolean-text">
+                                            (React OR "React.js" OR "React JS") AND (Node.js OR Nodejs OR "Node JS") AND (AWS OR "Amazon Web Services") AND ("5 years" OR "5+ years" OR "senior")
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex items-center justify-center">
+                                        <button class="px-4 py-2 bg-gray-800 text-white rounded text-sm hover:bg-gray-900 transition-colors flex items-center space-x-2 webapp-linkedin-btn">
+                                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                            </svg>
+                                            <span>Find Candidates on LinkedIn</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Simple Pricing</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Start free, scale as you grow
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white border-2 border-gray-200 rounded-xl p-8 hover-lift">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Free</h3>
+                    <p class="text-4xl font-bold text-blue-600 mb-6">$0<span class="text-lg text-gray-600">/month</span></p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>5 job descriptions per month</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Basic boolean search</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Interview questions</span>
+                        </li>
+                    </ul>
+                    <a href="https://firki-web.vercel.app" class="w-full py-3 bg-gray-100 text-gray-900 rounded-lg font-semibold hover:bg-gray-200 transition-colors text-center block">
+                        Get Started Free
+                    </a>
+                </div>
+                <div class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-xl p-8 hover-lift">
+                    <h3 class="text-2xl font-bold mb-4">Pro</h3>
+                    <p class="text-4xl font-bold mb-6">$29<span class="text-lg opacity-80">/month</span></p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Unlimited job descriptions</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Advanced boolean search</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Custom interview questions</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Email formatting</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="w-full py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-center block">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold mb-6 text-gray-900">Ready to Transform Your Recruitment?</h2>
+            <p class="text-xl text-gray-600 mb-8">
+                Join thousands of recruiters who are already using Firki to find better candidates faster.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://chrome.google.com/webstore/detail/firki" class="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                    Install Extension
+                </a>
+                <a href="https://firki-web.vercel.app" class="px-8 py-4 border-2 border-blue-600 text-blue-600 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors">
+                    Try Web App
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 bg-blue-600 text-white font-bold rounded-lg flex items-center justify-center text-sm">
+                            F
+                        </div>
+                        <span class="text-xl font-bold">Firki</span>
+                    </div>
+                    <p class="text-gray-400">
+                        AI-powered job description analyzer for modern recruiters.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="https://firki-web.vercel.app" class="hover:text-white transition-colors">Web App</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="PRIVACY_POLICY.html" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Firki. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // No external icon library needed - using inline SVG icons
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Demo tab switching
+        const gmailTab = document.getElementById('gmail-tab');
+        const webappTab = document.getElementById('webapp-tab');
+        const gmailDemo = document.getElementById('gmail-demo');
+        const webappDemo = document.getElementById('webapp-demo');
+
+        function switchToGmail() {
+            gmailTab.classList.add('bg-blue-600', 'text-white');
+            gmailTab.classList.remove('text-gray-600', 'hover:text-gray-900');
+            webappTab.classList.remove('bg-blue-600', 'text-white');
+            webappTab.classList.add('text-gray-600', 'hover:text-gray-900');
+            
+            gmailDemo.classList.remove('hidden');
+            webappDemo.classList.add('hidden');
+            
+            // Add entrance animation
+            gmailDemo.style.opacity = '0';
+            gmailDemo.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                gmailDemo.style.transition = 'all 0.5s ease-out';
+                gmailDemo.style.opacity = '1';
+                gmailDemo.style.transform = 'translateY(0)';
+            }, 100);
+        }
+
+        function switchToWebapp() {
+            webappTab.classList.add('bg-blue-600', 'text-white');
+            webappTab.classList.remove('text-gray-600', 'hover:text-gray-900');
+            gmailTab.classList.remove('bg-blue-600', 'text-white');
+            gmailTab.classList.add('text-gray-600', 'hover:text-gray-900');
+            
+            webappDemo.classList.remove('hidden');
+            gmailDemo.classList.add('hidden');
+            
+            // Add entrance animation
+            webappDemo.style.opacity = '0';
+            webappDemo.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                webappDemo.style.transition = 'all 0.5s ease-out';
+                webappDemo.style.opacity = '1';
+                webappDemo.style.transform = 'translateY(0)';
+            }, 100);
+        }
+
+        gmailTab.addEventListener('click', switchToGmail);
+        webappTab.addEventListener('click', switchToWebapp);
+
+        // Add live video-like animations with loops
+        document.addEventListener('DOMContentLoaded', function() {
+            let gmailAnimationInterval;
+            let webappAnimationInterval;
+
+            function animateGmailExtension() {
+                // Reset all elements to initial state
+                const searchInput = document.querySelector('#gmail-demo input[placeholder="Search mail"]');
+                const firkiButton = document.querySelector('#gmail-demo .bg-blue-600.text-white.px-4.py-2.rounded-lg');
+                const firkiPanel = document.querySelector('#gmail-demo .w-80.bg-white.border-l');
+                const skillTags = document.querySelectorAll('#gmail-demo .px-3.py-1.bg-gray-200');
+                const booleanTextarea = document.querySelector('#gmail-demo textarea[readonly]');
+                const copyButton = document.querySelector('#gmail-demo .absolute.top-2.right-2');
+                const linkedinButton = document.querySelector('#gmail-demo .bg-blue-600.text-white.py-3');
+                const checkmark = document.querySelector('#gmail-demo svg[class*="text-green-600"]');
+
+                // Reset search input
+                if (searchInput) {
+                    searchInput.value = '';
+                    searchInput.blur();
+                }
+
+                // Reset Firki button
+                if (firkiButton) {
+                    firkiButton.style.opacity = '0';
+                    firkiButton.style.transform = 'translateY(20px)';
+                }
+
+                // Reset Firki panel
+                if (firkiPanel) {
+                    firkiPanel.style.transform = 'translateX(100%)';
+                }
+
+                // Reset skill tags
+                skillTags.forEach(tag => {
+                    tag.style.opacity = '0';
+                    tag.style.transform = 'scale(0.8)';
+                });
+
+                // Reset boolean textarea
+                if (booleanTextarea) {
+                    booleanTextarea.style.opacity = '0';
+                    booleanTextarea.value = '';
+                }
+
+                // Reset copy button
+                if (copyButton) {
+                    copyButton.style.transform = 'scale(1)';
+                    copyButton.style.backgroundColor = '';
+                }
+
+                // Reset LinkedIn button
+                if (linkedinButton) {
+                    linkedinButton.style.transform = 'scale(1)';
+                    linkedinButton.style.boxShadow = '';
+                }
+
+                // Reset checkmark
+                if (checkmark) {
+                    checkmark.style.transform = 'scale(1)';
+                    checkmark.style.color = '#059669';
+                }
+
+                // Start animations
+                setTimeout(() => {
+                    // Simulate typing in search bar
+                    if (searchInput) {
+                        searchInput.focus();
+                        const searchText = "job description";
+                        let i = 0;
+                        const typeInterval = setInterval(() => {
+                            searchInput.value = searchText.substring(0, i);
+                            i++;
+                            if (i > searchText.length) {
+                                clearInterval(typeInterval);
+                                setTimeout(() => {
+                                    searchInput.blur();
+                                }, 1000);
+                            }
+                        }, 100);
+                    }
+                }, 1000);
+
+                // Animate Firki button appearance
+                setTimeout(() => {
+                    if (firkiButton) {
+                        firkiButton.style.transition = 'all 0.5s ease-out';
+                        firkiButton.style.opacity = '1';
+                        firkiButton.style.transform = 'translateY(0)';
+                    }
+                }, 3000);
+
+                // Simulate clicking the Firki button
+                setTimeout(() => {
+                    if (firkiButton) {
+                        firkiButton.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            firkiButton.style.transform = 'scale(1)';
+                        }, 150);
+                    }
+                }, 4000);
+
+                // Animate the Firki panel appearance
+                setTimeout(() => {
+                    if (firkiPanel) {
+                        firkiPanel.style.transition = 'all 0.6s ease-out';
+                        firkiPanel.style.transform = 'translateX(0)';
+                    }
+                }, 4500);
+
+                // Animate skills appearing one by one
+                skillTags.forEach((tag, index) => {
+                    setTimeout(() => {
+                        tag.style.transition = 'all 0.3s ease-out';
+                        tag.style.opacity = '1';
+                        tag.style.transform = 'scale(1)';
+                    }, 5500 + (index * 200));
+                });
+
+                // Animate boolean search text appearing
+                setTimeout(() => {
+                    if (booleanTextarea) {
+                        booleanTextarea.style.transition = 'all 0.5s ease-out';
+                        booleanTextarea.style.opacity = '1';
+                        // Simulate text appearing
+                        const booleanText = '("React" OR "React.js" OR "React JS") AND ("TypeScript" OR "TypeScript") AND ("Shopify" OR "Shopify Plus") AND ("Node.js" OR "NodeJS" OR "Node JS") AND ("senior" OR "5+ years" OR "5 years")';
+                        let i = 0;
+                        const typeInterval = setInterval(() => {
+                            booleanTextarea.value = booleanText.substring(0, i);
+                            i++;
+                            if (i > booleanText.length) {
+                                clearInterval(typeInterval);
+                            }
+                        }, 50);
+                    }
+                }, 7000);
+
+                // Animate copy button hover
+                setTimeout(() => {
+                    if (copyButton) {
+                        copyButton.style.transform = 'scale(1.1)';
+                        copyButton.style.backgroundColor = '#e5e7eb';
+                        setTimeout(() => {
+                            copyButton.style.transform = 'scale(1)';
+                            copyButton.style.backgroundColor = '';
+                        }, 300);
+                    }
+                }, 9000);
+
+                // Animate LinkedIn button
+                setTimeout(() => {
+                    if (linkedinButton) {
+                        linkedinButton.style.transform = 'scale(1.05)';
+                        linkedinButton.style.boxShadow = '0 10px 25px rgba(37, 99, 235, 0.3)';
+                        setTimeout(() => {
+                            linkedinButton.style.transform = 'scale(1)';
+                            linkedinButton.style.boxShadow = '';
+                        }, 300);
+                    }
+                }, 9500);
+
+                // Animate the checkmark icon
+                setTimeout(() => {
+                    if (checkmark) {
+                        checkmark.style.transform = 'scale(1.3)';
+                        checkmark.style.color = '#059669';
+                        setTimeout(() => {
+                            checkmark.style.transform = 'scale(1)';
+                        }, 300);
+                    }
+                }, 5000);
+
+                // Add cursor movement simulation
+                const emailContent = document.querySelector('#gmail-demo .bg-white');
+                if (emailContent) {
+                    // Remove existing cursor if any
+                    const existingCursor = emailContent.querySelector('.demo-cursor');
+                    if (existingCursor) {
+                        existingCursor.remove();
+                    }
+
+                    const cursor = document.createElement('div');
+                    cursor.className = 'demo-cursor';
+                    cursor.style.position = 'absolute';
+                    cursor.style.width = '2px';
+                    cursor.style.height = '20px';
+                    cursor.style.backgroundColor = '#3B82F6';
+                    cursor.style.animation = 'blink 1s infinite';
+                    cursor.style.zIndex = '10';
+                    emailContent.style.position = 'relative';
+                    emailContent.appendChild(cursor);
+
+                    // Move cursor around to simulate reading
+                    const positions = [
+                        { top: '20px', left: '20px' },
+                        { top: '60px', left: '20px' },
+                        { top: '100px', left: '20px' },
+                        { top: '140px', left: '20px' },
+                        { top: '180px', left: '20px' }
+                    ];
+
+                    positions.forEach((pos, index) => {
+                        setTimeout(() => {
+                            cursor.style.top = pos.top;
+                            cursor.style.left = pos.left;
+                        }, 1000 + (index * 800));
+                    });
+
+                    // Remove cursor after animation
+                    setTimeout(() => {
+                        cursor.remove();
+                    }, 6000);
+                }
+            }
+
+            // Start Gmail animation loop
+            function startGmailLoop() {
+                animateGmailExtension();
+                gmailAnimationInterval = setInterval(animateGmailExtension, 15000); // 15 seconds loop
+            }
+
+            // Stop Gmail animation loop
+            function stopGmailLoop() {
+                if (gmailAnimationInterval) {
+                    clearInterval(gmailAnimationInterval);
+                }
+            }
+
+            // Add CSS for cursor blink animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes blink {
+                    0%, 50% { opacity: 1; }
+                    51%, 100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Start Gmail animation when page loads
+            startGmailLoop();
+
+            // Add subtle hover effects to interactive elements
+            const interactiveElements = document.querySelectorAll('button, .cursor-pointer');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transition = 'all 0.2s ease-out';
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Web App Demo Animations
+            function animateWebApp() {
+                // Reset all elements to initial state
+                const jobInputArea = document.querySelector('.job-input-area');
+                const resultsArea = document.querySelector('.webapp-results');
+                const booleanText = document.querySelector('.webapp-boolean-text');
+                const linkedinBtn = document.querySelector('.webapp-linkedin-btn');
+                const questionsTab = document.querySelector('.webapp-questions-tab');
+                const searchTab = document.querySelector('.webapp-search-tab');
+
+                // Reset job input area
+                if (jobInputArea) {
+                    jobInputArea.style.opacity = '0';
+                    jobInputArea.style.transform = 'translateY(20px)';
+                }
+
+                // Reset results area
+                if (resultsArea) {
+                    resultsArea.style.opacity = '0';
+                }
+
+                // Reset boolean text
+                if (booleanText) {
+                    booleanText.style.opacity = '0';
+                    booleanText.textContent = '';
+                }
+
+                // Reset LinkedIn button
+                if (linkedinBtn) {
+                    linkedinBtn.style.transform = 'scale(1)';
+                    linkedinBtn.style.boxShadow = '';
+                }
+
+                // Reset tabs to Search active
+                if (questionsTab && searchTab) {
+                    searchTab.classList.remove('bg-gray-200', 'text-gray-700');
+                    searchTab.classList.add('bg-blue-600', 'text-white');
+                    questionsTab.classList.remove('bg-blue-600', 'text-white');
+                    questionsTab.classList.add('bg-gray-200', 'text-gray-700');
+                }
+
+                // Start animations
+                setTimeout(() => {
+                    // Animate job input area
+                    if (jobInputArea) {
+                        jobInputArea.style.transition = 'all 0.5s ease-out';
+                        jobInputArea.style.opacity = '1';
+                        jobInputArea.style.transform = 'translateY(0)';
+                    }
+                }, 500);
+
+                setTimeout(() => {
+                    // Animate results area
+                    if (resultsArea) {
+                        resultsArea.style.transition = 'all 0.5s ease-out';
+                        resultsArea.style.opacity = '1';
+                    }
+                }, 1000);
+
+                setTimeout(() => {
+                    // Animate boolean text appearing
+                    if (booleanText) {
+                        booleanText.style.transition = 'all 0.5s ease-out';
+                        booleanText.style.opacity = '1';
+                        // Simulate text appearing
+                        const text = '(React OR "React.js" OR "React JS") AND (Node.js OR Nodejs OR "Node JS") AND (AWS OR "Amazon Web Services") AND ("5 years" OR "5+ years" OR "senior")';
+                        let i = 0;
+                        const typeInterval = setInterval(() => {
+                            booleanText.textContent = text.substring(0, i);
+                            i++;
+                            if (i > text.length) {
+                                clearInterval(typeInterval);
+                            }
+                        }, 30);
+                    }
+                }, 1500);
+
+                setTimeout(() => {
+                    // Animate LinkedIn button
+                    if (linkedinBtn) {
+                        linkedinBtn.style.transform = 'scale(1.05)';
+                        linkedinBtn.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+                        setTimeout(() => {
+                            linkedinBtn.style.transform = 'scale(1)';
+                            linkedinBtn.style.boxShadow = '';
+                        }, 300);
+                    }
+                }, 3000);
+
+                setTimeout(() => {
+                    // Switch to Questions tab
+                    if (questionsTab && searchTab) {
+                        questionsTab.classList.remove('bg-gray-200', 'text-gray-700');
+                        questionsTab.classList.add('bg-blue-600', 'text-white');
+                        searchTab.classList.remove('bg-blue-600', 'text-white');
+                        searchTab.classList.add('bg-gray-200', 'text-gray-700');
+                        
+                        // Update results content
+                        const resultsContent = document.querySelector('.webapp-results');
+                        if (resultsContent) {
+                            resultsContent.innerHTML = `
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-semibold text-gray-800 flex items-center mb-3">
+                                        <svg class="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Interview Questions
+                                    </h4>
+                                    <div class="space-y-2">
+                                        <div class="bg-white border border-gray-200 rounded p-3">
+                                            <p class="text-xs text-gray-800 mb-1">How would you optimize a React component for performance?</p>
+                                            <span class="text-xs font-medium bg-blue-100 text-blue-700 px-2 py-1 rounded-full">React</span>
+                                        </div>
+                                        <div class="bg-white border border-gray-200 rounded p-3">
+                                            <p class="text-xs text-gray-800 mb-1">Describe your experience with AWS services.</p>
+                                            <span class="text-xs font-medium bg-green-100 text-green-700 px-2 py-1 rounded-full">AWS</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                }, 4000);
+
+                setTimeout(() => {
+                    // Switch back to Search tab
+                    if (questionsTab && searchTab) {
+                        searchTab.classList.remove('bg-gray-200', 'text-gray-700');
+                        searchTab.classList.add('bg-blue-600', 'text-white');
+                        questionsTab.classList.remove('bg-blue-600', 'text-white');
+                        questionsTab.classList.add('bg-gray-200', 'text-gray-700');
+                        
+                        // Restore original results content
+                        const resultsContent = document.querySelector('.webapp-results');
+                        if (resultsContent) {
+                                                    resultsContent.innerHTML = `
+                            <div class="mb-4">
+                                <h4 class="text-sm font-semibold text-gray-800 flex items-center mb-3">
+                                    <svg class="w-4 h-4 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                    Boolean Search
+                                </h4>
+                                <div class="bg-white border border-gray-200 rounded p-3 text-xs font-mono text-gray-700 webapp-boolean-text">
+                                    (React OR "React.js" OR "React JS") AND (Node.js OR Nodejs OR "Node JS") AND (AWS OR "Amazon Web Services") AND ("5 years" OR "5+ years" OR "senior")
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-center">
+                                <button class="px-4 py-2 bg-gray-800 text-white rounded text-sm hover:bg-gray-900 transition-colors flex items-center space-x-2 webapp-linkedin-btn">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                    </svg>
+                                    <span>Find Candidates on LinkedIn</span>
+                                </button>
+                            </div>
+                        `;
+                        }
+                    }
+                }, 6000);
+            }
+
+            // Start Web App animation loop
+            function startWebAppLoop() {
+                animateWebApp();
+                webappAnimationInterval = setInterval(animateWebApp, 10000); // 10 seconds loop
+            }
+
+            // Stop Web App animation loop
+            function stopWebAppLoop() {
+                if (webappAnimationInterval) {
+                    clearInterval(webappAnimationInterval);
+                }
+            }
+
+            // Trigger web app animations when switching to web app tab
+            webappTab.addEventListener('click', function() {
+                stopGmailLoop(); // Stop Gmail loop
+                setTimeout(() => {
+                    startWebAppLoop(); // Start Web App loop
+                }, 100);
+            });
+
+            // Trigger Gmail animations when switching to Gmail tab
+            gmailTab.addEventListener('click', function() {
+                stopWebAppLoop(); // Stop Web App loop
+                setTimeout(() => {
+                    startGmailLoop(); // Start Gmail loop
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
